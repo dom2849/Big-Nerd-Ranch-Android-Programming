@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="true_response">True</string>
+    <string name="false_response">False</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
+    <string name="question_2add2">2+2 = 4</string>
+    <string name="question_2into2">2*2 = 4</string>
+    <string name="question_divide_by_zero">4/0 = 0 </string>
+    <string name="question_subtract5">4\-5 = \-1</string>
+</resources>
