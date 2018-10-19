@@ -9,4 +9,8 @@
     <string name="question_2into2">2*2 = 4</string>
     <string name="question_divide_by_zero">4/0 = 0 </string>
     <string name="question_subtract5">4\-5 = \-1</string>
+
+    <string name="previous_content_description">Navigates to previous question</string>
+    <string name="next_content_description">Navigates to next question</string>
+
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,14 +17,15 @@ public class MainActivity extends AppCompatActivity {
     private List<Question> questions;
     private Button btn_True;
     private Button btn_False;
-    private Button btn_next;
-    private Button btn_previous;
+    private ImageButton btn_next;
+    private ImageButton btn_previous;
     private TextView text_question;
     private int currentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: Called");
         setContentView(R.layout.activity_main);
         questions = new ArrayList<>();
         addQuestions();
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btn_False = findViewById(R.id.btn_false);
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_previous);
+        btn_previous.setEnabled(false);
         text_question = findViewById(R.id.question_display);
 
         btn_True.setOnClickListener(trueOrFalseListener);
@@ -92,5 +95,41 @@ public class MainActivity extends AppCompatActivity {
     private void changeText(int currentIndex) {
         Question question = questions.get(currentIndex);
         text_question.setText(question.getResStringQuestion());
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: Called");
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d(TAG, "onStart: Called");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(TAG, "onResume: Called");
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(TAG, "onPause: Called");
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.d(TAG, "onStop: Called");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: Called");
     }
 }
