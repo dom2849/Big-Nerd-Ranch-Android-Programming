@@ -10,7 +10,7 @@
         android:id="@+id/question_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal|top"
         android:text="@string/question_2add2"
         android:textSize="20sp"/>
 
