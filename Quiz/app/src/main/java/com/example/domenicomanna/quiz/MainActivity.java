@@ -9,9 +9,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String KEY_INDEX = "index";
@@ -43,65 +40,110 @@ public class MainActivity extends AppCompatActivity {
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_previous);
         text_question = findViewById(R.id.question_display);
-        changeText(currentIndex);
-        btn_True.setOnClickListener(trueOrFalseListener);
-        btn_False.setOnClickListener(trueOrFalseListener);
-        btn_next.setOnClickListener(nextOrPreviousListener);
-        btn_previous.setOnClickListener(nextOrPreviousListener);
+        changeQuestion(currentIndex);
+        configureClickListeners();
     }
 
-
-
-    View.OnClickListener trueOrFalseListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            Question current = questions[currentIndex];
-            boolean questionIsRight = current.getAnswer();
-
-            if (v.getId() == btn_True.getId() && questionIsRight ){
-                makeToast("Good job!!!");
-            }
-
-            else if (v.getId() == btn_False.getId() && !questionIsRight){
-                makeToast("Good job!!!");
-            }
-            else {
-                makeToast("Try again!");
-            }
-        }
-    };
-
-    private void makeToast(String feedback) {
-        Toast.makeText(this, feedback, Toast.LENGTH_SHORT).show();
+    /**
+     * Activate click listeners for all buttons
+     */
+    private void configureClickListeners() {
+        btn_True.setOnClickListener((View v) -> checkIfAnswerIsTrue());
+        btn_False.setOnClickListener((View v) -> checkIfAnswerIsFalse());
+        btn_next.setOnClickListener((View v) -> goToNextQuestion());
+        btn_previous.setOnClickListener((View v) -> goToPreviousQuestion());
     }
 
-    View.OnClickListener nextOrPreviousListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            Log.d(TAG, "onClick: Next or previous clicked");
-            if (v.getId() == btn_next.getId()){
-                currentIndex++;
-                if (currentIndex == questions.length){
-                    currentIndex = 0;
-                    changeText(0);
-                }
-            }
-            else{
-                currentIndex--;
-                if (currentIndex == -1){
-                    currentIndex = questions.length - 1;
-                    changeText(currentIndex);
-                }
-            }
-            changeText(currentIndex);
+    /**
+     * Checks if the answer of the current question is true
+     */
+    private void checkIfAnswerIsTrue() {
+        Question current = questions[currentIndex];
+        boolean questionIsTrue = current.getAnswer();
+        if (questionIsTrue){
+            makeToast("Good job!");
+            disableTrueAndFalseButtons();
         }
-    };
+        else {
+            makeToast("Try again!");
+            btn_True.setEnabled(false);
+        }
+    }
 
-    private void changeText(int currentIndex) {
+    /**
+     * Checks if the answer of the current question is false
+     */
+    private void checkIfAnswerIsFalse() {
+        Question current = questions[currentIndex];;
+        boolean answer = current.getAnswer();
+        if (!answer){
+            makeToast("Good job!");
+            disableTrueAndFalseButtons();
+        }
+        else {
+            makeToast("Try again!");
+            btn_False.setEnabled(false);
+        }
+    }
+
+    /**
+     * Renders the true and false buttons un-clickable
+     */
+    private void disableTrueAndFalseButtons() {
+        btn_True.setEnabled(false);
+        btn_False.setEnabled(false);
+    }
+
+    /**
+     * Renders the true and false buttons clickable
+     */
+    private void reactivateTrueAndFalseButtons() {
+        btn_True.setEnabled(true);
+        btn_False.setEnabled(true);
+    }
+
+    /**
+     * Goes to the next question
+     */
+    private void goToNextQuestion() {
+        reactivateTrueAndFalseButtons();
+        currentIndex++;
+        if (currentIndex == questions.length){
+            currentIndex = 0;
+        }
+        changeQuestion(currentIndex);
+    }
+
+    /**
+     * Goes to the previous question
+     */
+    private void goToPreviousQuestion(){
+        reactivateTrueAndFalseButtons();
+        currentIndex--;
+        if (currentIndex == -1){
+            currentIndex = questions.length-1;
+        }
+        changeQuestion(currentIndex);
+    }
+
+    /**
+     *
+     * @param currentIndex the index of the question array
+     */
+    private void changeQuestion(int currentIndex) {
         Question question = questions[currentIndex];
         text_question.setText(question.getResStringQuestion());
     }
+
+    /**
+     *
+     * @param message The message to be displayed on screen
+     */
+    private void makeToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
 
     @Override
     protected void onRestart() {
