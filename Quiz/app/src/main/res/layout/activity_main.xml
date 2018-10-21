@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_2add2"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,32 +24,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/true_response" />
+
         <Button
             android:id="@+id/btn_false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/false_response"/>
+            android:text="@string/false_response" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <ImageButton
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/next_content_description"
+        android:src="@drawable/arrow_right" />
 
-        <ImageButton
-            android:id="@+id/btn_previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/previous_content_description"
-            android:src="@drawable/arrow_left" />
-
-        <ImageButton
-            android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/next_content_description"
-            android:src="@drawable/arrow_right" />
-
-    </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>
